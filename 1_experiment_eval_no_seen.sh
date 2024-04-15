@@ -9,4 +9,3 @@ echo 'Unseen Crop NoAttention NN:'
 python eval.py --cfg experiments/test_RGM_Unseen_Crop_modelnet40_NoAttention_nn.yaml
 echo 'Unseen Crop NoAIs:'
 python eval.py --cfg experiments/test_RGM_Unseen_Crop_modelnet40_NoAIS.yaml
-python eval.py --cfg experiments/test_RGM_Unseen_Crop_modelnet40_NoAIS.yaml
