@@ -6,7 +6,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 
-def dcm2euler(mats: np.ndarray, seq: str = 'zyx', degrees: bool = True):
+def matrix2euler(mats: np.ndarray, seq: str = 'zyx', degrees: bool = True):
     """Converts rotation matrix to euler angles
 
     Args:
@@ -20,7 +20,7 @@ def dcm2euler(mats: np.ndarray, seq: str = 'zyx', degrees: bool = True):
 
     eulers = []
     for i in range(mats.shape[0]):
-        r = Rotation.from_dcm(mats[i])
+        r = Rotation.from_matrix(mats[i])
         eulers.append(r.as_euler(seq, degrees=degrees))
     return np.stack(eulers)
 

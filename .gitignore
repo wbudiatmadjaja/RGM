@@ -1,0 +1,7 @@
+__pycache__
+*.png
+*.pt
+*.pts
+modelnet40*/
+RGM_DGCNN*
+shapenet_raw/
