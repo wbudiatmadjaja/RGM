@@ -1,0 +1,262 @@
+/home/work/ws/RGM
+----------start-----------
+ModelNet40_eval:
+Seen Clean input:
+May not be the same as the results of the paper
+DATASET:
+  BATCH_SIZE: 4
+  POINT_NUM: 1024
+  UNSEEN: False
+  NOISE_TYPE: clean
+  ROT_MAG: 45.0
+  TRANS_MAG: 0.5
+  PARTIAL_P_KEEP: [0.7, 0.7]
+PAIR:
+  GT_GRAPH_CONSTRUCT: fc
+  REF_GRAPH_CONSTRUCT: fc
+PGM:
+  FEATURE_NODE_CHANNEL: 512
+  FEATURE_EDGE_CHANNEL: 512
+  BS_ITER_NUM: 20
+  BS_EPSILON: 1e-10
+  VOTING_ALPHA: 20.0
+  GNN_LAYER: 2
+  GNN_FEAT: 512
+  POINTER:
+  SKADDCR: False
+  SKADDCRVALUE: 0.0
+  USEINLIERRATE: False
+  NORMALS: True
+  FEATURES: ['xyz', 'gxyz']
+  NEIGHBORSNUM: 20
+  USEATTEND: attentiontransformer
+VISDOM:
+  OPEN: False
+  PORT: 8097
+  SERVER: http://localhost
+MODEL_NAME: RGM_DGCNN
+DATASET_NAME: ModelNet40
+DATASET_FULL_NAME: modelnet40_ply_hdf5_2048
+MODULE: models.Net
+OUTPUT_PATH: output/RGM_DGCNN_ModelNet40Seen_NoPreW['xyz', 'gxyz']_attentiontran
+sformer_clean
+DATALOADER_NUM: 0
+STATISTIC_STEP: 100
+RANDOM_SEED: 123
+GPUS: [0]
+PRE_DCPWEIGHT: False
+TRAIN:
+  START_EPOCH: 0
+  NUM_EPOCHS: 30
+  LR: 0.001
+  OPTIM: SGD
+  LR_DECAY: 0.1
+  LR_STEP: [15, 25]
+  MOMENTUM: 0.9
+  LOSS_FUNC: perm
+EVAL:
+  EPOCH: -1
+  ITERATION: True
+  CYCLE: True
+  ITERATION_NUM: 2
+EXPERIMENT:
+  USEPGM: True
+  USEREFINE: False
+  ICPMAXCDIST: 0.1
+  SHAPENET: False
+  USERANSAC: False
+  OTHERMETHODFILE:
+-----------------Start evaluation-----------------
+train datasize: 2468
+model on device: cuda:0
+Loading best model parameters
+Iteration 100  5.12sample/s
+Iteration 200  5.27sample/s
+Iteration 300  5.31sample/s
+Iteration 400  5.31sample/s
+Iteration 500  5.33sample/s
+Iteration 600  5.29sample/s
+Mean-Loss: 0.0000 GT-Acc:1.0000 Pred-Acc:1.0000
+========
+Metrics:
+DeepCP metrics:0.0000(rot-rmse) | 0.0000(rot-mae) | 1.194e-07(trans-rmse) | 8.66
+6e-08(trans-mae)
+Rotation error 0.0132(deg, mean) | 0.0236(deg, rmse)
+Translation error 1.781e-07(mean) | 2.083e-07(rmse)
+RPM Chamfer error: 0.0000000(mean-sq)
+Source error: 0.0000000(mean-sq)
+Clip Chamfer error: 0.0000004(mean-sq)
+Evaluation complete in 7m 48s
+Seen Noisy input:
+May not be the same as the results of the paper
+DATASET:
+  BATCH_SIZE: 4
+  POINT_NUM: 1024
+  UNSEEN: False
+  NOISE_TYPE: jitter
+  ROT_MAG: 45.0
+  TRANS_MAG: 0.5
+  PARTIAL_P_KEEP: [0.7, 0.7]
+PAIR:
+  GT_GRAPH_CONSTRUCT: fc
+  REF_GRAPH_CONSTRUCT: fc
+PGM:
+  FEATURE_NODE_CHANNEL: 512
+  FEATURE_EDGE_CHANNEL: 512
+  BS_ITER_NUM: 20
+  BS_EPSILON: 1e-10
+  VOTING_ALPHA: 20.0
+  GNN_LAYER: 2
+  GNN_FEAT: 512
+  POINTER:
+  SKADDCR: True
+  SKADDCRVALUE: 0.0
+  USEINLIERRATE: False
+  NORMALS: True
+  FEATURES: ['xyz', 'gxyz']
+  NEIGHBORSNUM: 20
+  USEATTEND: attentiontransformer
+VISDOM:
+  OPEN: False
+  PORT: 8097
+  SERVER: http://localhost
+MODEL_NAME: RGM_DGCNN
+DATASET_NAME: ModelNet40
+DATASET_FULL_NAME: modelnet40_ply_hdf5_2048
+MODULE: models.Net
+OUTPUT_PATH: output/RGM_DGCNN_ModelNet40Seen_NoPreW['xyz', 'gxyz']_attentiontran
+sformer_jitter
+DATALOADER_NUM: 0
+STATISTIC_STEP: 100
+RANDOM_SEED: 123
+GPUS: [0]
+PRE_DCPWEIGHT: False
+TRAIN:
+  START_EPOCH: 0
+  NUM_EPOCHS: 50
+  LR: 0.001
+  OPTIM: SGD
+  LR_DECAY: 0.1
+  LR_STEP: [35, 45]
+  MOMENTUM: 0.9
+  LOSS_FUNC: perm
+EVAL:
+  EPOCH: -1
+  ITERATION: True
+  CYCLE: True
+  ITERATION_NUM: 2
+EXPERIMENT:
+  USEPGM: True
+  USEREFINE: False
+  ICPMAXCDIST: 0.1
+  SHAPENET: False
+  USERANSAC: False
+  OTHERMETHODFILE:
+-----------------Start evaluation-----------------
+train datasize: 2468
+model on device: cuda:0
+Loading best model parameters
+Iteration 100  3.16sample/s
+Iteration 200  3.27sample/s
+Iteration 300  3.31sample/s
+Iteration 400  3.30sample/s
+Iteration 500  3.28sample/s
+Iteration 600  3.28sample/s
+Mean-Loss: 0.0000 GT-Acc:0.8172 Pred-Acc:0.8811
+========
+Metrics:
+DeepCP metrics:0.3813(rot-rmse) | 0.0798(rot-mae) | 0.002101(trans-rmse) | 0.000
+6917(trans-mae)
+Rotation error 0.1486(deg, mean) | 0.6395(deg, rmse)
+Translation error 0.00141(mean) | 0.003639(rmse)
+RPM Chamfer error: 0.0010260(mean-sq)
+Source error: 0.0000026(mean-sq)
+Clip Chamfer error: 0.0418529(mean-sq)
+Evaluation complete in 12m 36s
+Seen Partial input:
+May not be the same as the results of the paper
+DATASET:
+  BATCH_SIZE: 4
+  POINT_NUM: 1024
+  UNSEEN: False
+  NOISE_TYPE: crop
+  ROT_MAG: 45.0
+  TRANS_MAG: 0.5
+  PARTIAL_P_KEEP: [0.7, 0.7]
+PAIR:
+  GT_GRAPH_CONSTRUCT: fc
+  REF_GRAPH_CONSTRUCT: fc
+PGM:
+  FEATURE_NODE_CHANNEL: 512
+  FEATURE_EDGE_CHANNEL: 512
+  BS_ITER_NUM: 20
+  BS_EPSILON: 1e-10
+  VOTING_ALPHA: 20.0
+  GNN_LAYER: 2
+  GNN_FEAT: 512
+  POINTER:
+  SKADDCR: True
+  SKADDCRVALUE: 0.0
+  USEINLIERRATE: False
+  NORMALS: True
+  FEATURES: ['xyz', 'gxyz']
+  NEIGHBORSNUM: 20
+  USEATTEND: attentiontransformer
+VISDOM:
+  OPEN: False
+  PORT: 8097
+  SERVER: http://localhost
+MODEL_NAME: RGM_DGCNN
+DATASET_NAME: ModelNet40
+DATASET_FULL_NAME: modelnet40_ply_hdf5_2048
+MODULE: models.Net
+OUTPUT_PATH: output/RGM_DGCNN_ModelNet40Seen_NoPreW['xyz', 'gxyz']_attentiontran
+sformer_crop
+DATALOADER_NUM: 0
+STATISTIC_STEP: 100
+RANDOM_SEED: 123
+GPUS: [0]
+PRE_DCPWEIGHT: False
+TRAIN:
+  START_EPOCH: 123
+  NUM_EPOCHS: 200
+  LR: 0.001
+  OPTIM: SGD
+  LR_DECAY: 0.2
+  LR_STEP: [120, 140]
+  MOMENTUM: 0.9
+  LOSS_FUNC: perm
+EVAL:
+  EPOCH: -1
+  ITERATION: True
+  CYCLE: True
+  ITERATION_NUM: 2
+EXPERIMENT:
+  USEPGM: True
+  USEREFINE: False
+  ICPMAXCDIST: 0.05
+  SHAPENET: False
+  USERANSAC: False
+  OTHERMETHODFILE:
+-----------------Start evaluation-----------------
+train datasize: 2468
+model on device: cuda:0
+Loading best model parameters
+Iteration 100  6.76sample/s
+Iteration 200  7.31sample/s
+Iteration 300  7.28sample/s
+Iteration 400  7.30sample/s
+Iteration 500  7.26sample/s
+Iteration 600  7.29sample/s
+Mean-Loss: 0.0000 GT-Acc:0.7316 Pred-Acc:0.8613
+========
+Metrics:
+DeepCP metrics:3.5085(rot-rmse) | 0.4928(rot-mae) | 0.02503(trans-rmse) | 0.0041
+49(trans-mae)
+Rotation error 0.9326(deg, mean) | 4.9608(deg, rmse)
+Translation error 0.008772(mean) | 0.04335(rmse)
+RPM Chamfer error: 0.0429770(mean-sq)
+Source error: 0.0002938(mean-sq)
+Clip Chamfer error: 0.0823824(mean-sq)
+Evaluation complete in 5m 43s
+(RGM) work@william-ws-20240409-144756:~/ws/RGM$

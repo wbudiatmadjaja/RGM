@@ -1,0 +1,336 @@
+/home/work/ws/RGM
+----------start-----------
+ModelNet40_eval:
+Unseen Crop Transformer:
+May not be the same as the results of the paper
+DATASET:
+  BATCH_SIZE: 4
+  POINT_NUM: 1024
+  UNSEEN: True
+  NOISE_TYPE: crop
+  ROT_MAG: 45.0
+  TRANS_MAG: 0.5
+  PARTIAL_P_KEEP: [0.7, 0.7]
+PAIR:
+  GT_GRAPH_CONSTRUCT: fc
+  REF_GRAPH_CONSTRUCT: fc
+PGM:
+  FEATURE_NODE_CHANNEL: 512
+  FEATURE_EDGE_CHANNEL: 512
+  BS_ITER_NUM: 20
+  BS_EPSILON: 1e-10
+  VOTING_ALPHA: 20.0
+  GNN_LAYER: 2
+  GNN_FEAT: 512
+  POINTER:
+  SKADDCR: True
+  SKADDCRVALUE: 0.0
+  USEINLIERRATE: False
+  NORMALS: True
+  FEATURES: ['xyz', 'gxyz']
+  NEIGHBORSNUM: 20
+  USEATTEND: attentiontransformer
+VISDOM:
+  OPEN: False
+  PORT: 8097
+  SERVER: http://localhost
+MODEL_NAME: RGM_DGCNN
+DATASET_NAME: ModelNet40
+DATASET_FULL_NAME: modelnet40_ply_hdf5_2048
+MODULE: models.Net
+OUTPUT_PATH: output/RGM_DGCNN_ModelNet40Unseen_NoPreW['xyz', 'gxyz']_attentiontr
+ansformer_crop
+DATALOADER_NUM: 0
+STATISTIC_STEP: 100
+RANDOM_SEED: 123
+GPUS: [0]
+PRE_DCPWEIGHT: False
+TRAIN:
+  START_EPOCH: 0
+  NUM_EPOCHS: 200
+  LR: 0.001
+  OPTIM: SGD
+  LR_DECAY: 0.2
+  LR_STEP: [120, 140]
+  MOMENTUM: 0.9
+  LOSS_FUNC: perm
+EVAL:
+  EPOCH: -1
+  ITERATION: True
+  CYCLE: True
+  ITERATION_NUM: 2
+EXPERIMENT:
+  USEPGM: True
+  USEREFINE: False
+  ICPMAXCDIST: 0.05
+  SHAPENET: False
+  USERANSAC: False
+  OTHERMETHODFILE:
+-----------------Start evaluation-----------------
+train datasize: 1266
+model on device: cuda:0
+Loading best model parameters
+Iteration 100  6.34sample/s
+Iteration 200  7.30sample/s
+Iteration 300  7.33sample/s
+Mean-Loss: 0.0000 GT-Acc:0.7433 Pred-Acc:0.8734
+========
+Metrics:
+DeepCP metrics:3.1540(rot-rmse) | 0.8375(rot-mae) | 0.02473(trans-rmse) | 0.0067
+5(trans-mae)
+Rotation error 1.5472(deg, mean) | 5.1104(deg, rmse)
+Translation error 0.01419(mean) | 0.04283(rmse)
+RPM Chamfer error: 0.0428335(mean-sq)
+Source error: 0.0006378(mean-sq)
+Clip Chamfer error: 0.0846946(mean-sq)
+Evaluation complete in 3m 2s
+Unseen Crop NoAttention:
+May not be the same as the results of the paper
+DATASET:
+  BATCH_SIZE: 4
+  POINT_NUM: 1024
+  UNSEEN: True
+  NOISE_TYPE: crop
+  ROT_MAG: 45.0
+  TRANS_MAG: 0.5
+  PARTIAL_P_KEEP: [0.7, 0.7]
+PAIR:
+  GT_GRAPH_CONSTRUCT: fc
+  REF_GRAPH_CONSTRUCT: fc
+PGM:
+  FEATURE_NODE_CHANNEL: 512
+  FEATURE_EDGE_CHANNEL: 512
+  BS_ITER_NUM: 20
+  BS_EPSILON: 1e-10
+  VOTING_ALPHA: 20.0
+  GNN_LAYER: 2
+  GNN_FEAT: 512
+  POINTER:
+  SKADDCR: True
+  SKADDCRVALUE: 0.0
+  USEINLIERRATE: False
+  NORMALS: True
+  FEATURES: ['xyz', 'gxyz']
+  NEIGHBORSNUM: 20
+  USEATTEND: NoAttention
+VISDOM:
+  OPEN: False
+  PORT: 8097
+  SERVER: http://localhost
+MODEL_NAME: RGM_DGCNN
+DATASET_NAME: ModelNet40
+DATASET_FULL_NAME: modelnet40_ply_hdf5_2048
+MODULE: models.Net
+OUTPUT_PATH: output/RGM_DGCNN_ModelNet40Unseen_NoPreW['xyz', 'gxyz']_NoAttention
+_crop
+DATALOADER_NUM: 0
+STATISTIC_STEP: 100
+RANDOM_SEED: 123
+GPUS: [0]
+PRE_DCPWEIGHT: False
+TRAIN:
+  START_EPOCH: 0
+  NUM_EPOCHS: 200
+  LR: 0.001
+  OPTIM: SGD
+  LR_DECAY: 0.2
+  LR_STEP: [120, 140]
+  MOMENTUM: 0.9
+  LOSS_FUNC: perm
+EVAL:
+  EPOCH: -1
+  ITERATION: True
+  CYCLE: True
+  ITERATION_NUM: 2
+EXPERIMENT:
+  USEPGM: True
+  USEREFINE: False
+  ICPMAXCDIST: 0.05
+  SHAPENET: False
+  USERANSAC: False
+  OTHERMETHODFILE:
+-----------------Start evaluation-----------------
+train datasize: 1266
+model on device: cuda:0
+Loading best model parameters
+Iteration 100  9.50sample/s
+Iteration 200  11.94sample/s
+Iteration 300  11.98sample/s
+Mean-Loss: 0.0000 GT-Acc:0.6676 Pred-Acc:0.8199
+========
+Metrics:
+DeepCP metrics:5.5189(rot-rmse) | 1.5210(rot-mae) | 0.04687(trans-rmse) | 0.0145
+4(trans-mae)
+Rotation error 2.8999(deg, mean) | 9.2569(deg, rmse)
+Translation error 0.03103(mean) | 0.08118(rmse)
+RPM Chamfer error: 0.0405241(mean-sq)
+Source error: 0.0011987(mean-sq)
+Clip Chamfer error: 0.0863130(mean-sq)
+Evaluation complete in 1m 55s
+Unseen Crop NoAttention NN:
+May not be the same as the results of the paper
+DATASET:
+  BATCH_SIZE: 4
+  POINT_NUM: 1024
+  UNSEEN: True
+  NOISE_TYPE: crop
+  ROT_MAG: 45.0
+  TRANS_MAG: 0.5
+  PARTIAL_P_KEEP: [0.7, 0.7]
+PAIR:
+  GT_GRAPH_CONSTRUCT: near
+  REF_GRAPH_CONSTRUCT: near
+PGM:
+  FEATURE_NODE_CHANNEL: 512
+  FEATURE_EDGE_CHANNEL: 512
+  BS_ITER_NUM: 20
+  BS_EPSILON: 1e-10
+  VOTING_ALPHA: 20.0
+  GNN_LAYER: 2
+  GNN_FEAT: 512
+  POINTER:
+  SKADDCR: True
+  SKADDCRVALUE: 0.0
+  USEINLIERRATE: False
+  NORMALS: True
+  FEATURES: ['xyz', 'gxyz']
+  NEIGHBORSNUM: 20
+  USEATTEND: NoAttention_near
+VISDOM:
+  OPEN: False
+  PORT: 8097
+  SERVER: http://localhost
+MODEL_NAME: RGM_DGCNN
+DATASET_NAME: ModelNet40
+DATASET_FULL_NAME: modelnet40_ply_hdf5_2048
+MODULE: models.Net
+OUTPUT_PATH: output/RGM_DGCNN_ModelNet40Unseen_NoPreW['xyz', 'gxyz']_NoAttention
+_near_crop
+DATALOADER_NUM: 0
+STATISTIC_STEP: 100
+RANDOM_SEED: 123
+GPUS: [0]
+PRE_DCPWEIGHT: False
+TRAIN:
+  START_EPOCH: 0
+  NUM_EPOCHS: 200
+  LR: 0.001
+  OPTIM: SGD
+  LR_DECAY: 0.2
+  LR_STEP: [120, 140]
+  MOMENTUM: 0.9
+  LOSS_FUNC: perm
+EVAL:
+  EPOCH: -1
+  ITERATION: True
+  CYCLE: True
+  ITERATION_NUM: 2
+EXPERIMENT:
+  USEPGM: True
+  USEREFINE: False
+  ICPMAXCDIST: 0.05
+  SHAPENET: False
+  USERANSAC: False
+  OTHERMETHODFILE:
+-----------------Start evaluation-----------------
+train datasize: 1266
+model on device: cuda:0
+Loading best model parameters
+Iteration 100  5.54sample/s
+Iteration 200  6.01sample/s
+Iteration 300  6.50sample/s
+Mean-Loss: 0.0000 GT-Acc:0.7522 Pred-Acc:0.8661
+========
+Metrics:
+DeepCP metrics:4.0915(rot-rmse) | 1.1919(rot-mae) | 0.03839(trans-rmse) | 0.0107
+9(trans-mae)
+Rotation error 2.2512(deg, mean) | 6.6938(deg, rmse)
+Translation error 0.02231(mean) | 0.06649(rmse)
+RPM Chamfer error: 0.0419144(mean-sq)
+Source error: 0.0009743(mean-sq)
+Clip Chamfer error: 0.0860514(mean-sq)
+Evaluation complete in 3m 31s
+Unseen Crop NoAIs:
+May not be the same as the results of the paper
+DATASET:
+  BATCH_SIZE: 4
+  POINT_NUM: 1024
+  UNSEEN: True
+  NOISE_TYPE: crop
+  ROT_MAG: 45.0
+  TRANS_MAG: 0.5
+  PARTIAL_P_KEEP: [0.7, 0.7]
+PAIR:
+  GT_GRAPH_CONSTRUCT: fc
+  REF_GRAPH_CONSTRUCT: fc
+PGM:
+  FEATURE_NODE_CHANNEL: 512
+  FEATURE_EDGE_CHANNEL: 512
+  BS_ITER_NUM: 20
+  BS_EPSILON: 1e-10
+  VOTING_ALPHA: 20.0
+  GNN_LAYER: 2
+  GNN_FEAT: 512
+  POINTER:
+  SKADDCR: True
+  SKADDCRVALUE: 0.0
+  USEINLIERRATE: False
+  NORMALS: True
+  FEATURES: ['xyz', 'gxyz']
+  NEIGHBORSNUM: 20
+  USEATTEND: attentiontransformernoais
+VISDOM:
+  OPEN: False
+  PORT: 8097
+  SERVER: http://localhost
+MODEL_NAME: RGM_DGCNN
+DATASET_NAME: ModelNet40
+DATASET_FULL_NAME: modelnet40_ply_hdf5_2048
+MODULE: models.Net_noais
+OUTPUT_PATH: output/RGM_DGCNN_ModelNet40Unseen_NoPreW['xyz', 'gxyz']_attentiontr
+ansformernoais_crop
+DATALOADER_NUM: 0
+STATISTIC_STEP: 100
+RANDOM_SEED: 123
+GPUS: [0]
+PRE_DCPWEIGHT: False
+TRAIN:
+  START_EPOCH: 0
+  NUM_EPOCHS: 200
+  LR: 0.001
+  OPTIM: SGD
+  LR_DECAY: 0.2
+  LR_STEP: [120, 140]
+  MOMENTUM: 0.9
+  LOSS_FUNC: perm
+EVAL:
+  EPOCH: -1
+  ITERATION: True
+  CYCLE: True
+  ITERATION_NUM: 2
+EXPERIMENT:
+  USEPGM: True
+  USEREFINE: False
+  ICPMAXCDIST: 0.05
+  SHAPENET: False
+  USERANSAC: False
+  OTHERMETHODFILE:
+-----------------Start evaluation-----------------
+train datasize: 1266
+model on device: cuda:0
+Loading best model parameters
+Iteration 100  6.87sample/s
+Iteration 200  8.01sample/s
+Iteration 300  8.03sample/s
+Mean-Loss: 0.0000 GT-Acc:0.0294 Pred-Acc:0.4575
+========
+Metrics:
+DeepCP metrics:26.5163(rot-rmse) | 10.6957(rot-mae) | 0.148(trans-rmse) | 0.0695
+6(trans-mae)
+Rotation error 19.2117(deg, mean) | 38.4391(deg, rmse)
+Translation error 0.1408(mean) | 0.2564(rmse)
+RPM Chamfer error: 0.0695418(mean-sq)
+Source error: 0.0171259(mean-sq)
+Clip Chamfer error: 0.1133687(mean-sq)
+Evaluation complete in 2m 46s
+(RGM) work@william-ws-20240409-144756:~/ws/RGM$
