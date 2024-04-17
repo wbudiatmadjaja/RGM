@@ -100,9 +100,9 @@ def RANSACSVDslover(src_o, tgt_o, s_perm_mat):
         src_o0i.points = open3d.utility.Vector3dVector(src_o0[i])
         tgt_o0i.points = open3d.utility.Vector3dVector(tgt_o0[i])
         corr = open3d.utility.Vector2iVector(np.arange(src_o0[i].shape[0])[:,None].repeat(2, axis=1))
-        reg_result = open3d.registration.registration_ransac_based_on_correspondence(src_o0i, tgt_o0i, corr, 0.2)
-        R[i] = torch.from_numpy(reg_result.transformation[:3, :3]).to(s_perm_mat)
-        t[i] = torch.from_numpy(reg_result.transformation[:3, 3])[:,None].to(s_perm_mat)
+        reg_result = open3d.pipelines.registration.registration_ransac_based_on_correspondence(src_o0i, tgt_o0i, corr, 0.2)
+        R[i] = torch.from_numpy(reg_result.transformation[:3, :3].copy()).to(s_perm_mat)
+        t[i] = torch.from_numpy(reg_result.transformation[:3, 3].copy())[:,None].to(s_perm_mat)
         corr_re = np.asarray(reg_result.correspondence_set)
         s_perm_mat_re[i,corr_re[:,0]] = s_perm_mat[i,corr_re[:,0]]
 
