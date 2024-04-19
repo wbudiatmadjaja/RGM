@@ -147,7 +147,7 @@ if __name__ == '__main__':
     x_mesh.vertices = (r_gt.as_matrix() @ x_mesh.vertices.T).T
     print(f'GT rotated by {r_gt.magnitude() * 180 / np.pi:.2f} degrees')
 
-    R, T = infer_on_mesh(x_mesh, x_mesh_gt, 
+    R, T = infer_on_mesh(x_mesh, y_mesh, 
                          model, 
                          estimate_iters=100)
 
