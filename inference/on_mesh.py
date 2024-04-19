@@ -11,9 +11,31 @@ from tqdm import tqdm
 from scipy.spatial.transform import Rotation
 from models.correspondSlover import SVDslover, RANSACSVDslover
 
-def caliters_perm(model, P1_gt_copy, P2_gt_copy, 
-                  A1_gt, A2_gt, n1_gt, n2_gt, 
-                  estimate_iters, use_ransac:bool=False):
+def caliters_perm(model: torch.nn.Module, P1_gt_copy:torch.Tensor, 
+                  P2_gt_copy: torch.Tensor, A1_gt: torch.Tensor, 
+                  A2_gt: torch.Tensor, n1_gt: torch.Tensor, n2_gt: torch.Tensor, 
+                  estimate_iters: int, use_ransac:bool=False):
+    """
+    Iteratively infer on the input. Input will be modified in_place, 
+    make sure to create a copy to retain original orientation and translation.
+
+    Args:
+        model (torch.nn.Module): Torch model to use. Make sure to
+                                configure the model with utils.config.cfg_from_file
+                                and load the model weight correctly using
+                                utils.model_sl.load_model.
+        P1_gt_copy (torch.Tensor): Source point cloud.
+        P2_gt_copy (torch.Tensor): Target point cloud.
+        A1_gt (torch.Tensor): Graph matrix for source mesh.
+        A2_gt (torch.Tensor): Graph matrix for target mesh.
+        n1_gt (torch.Tensor): Number of points for source mesh.
+        n2_gt (torch.Tensor): Number of points for target mesh.
+        estimate_iters (int): Number of iterations to evaluate the mesh.
+        use_ransac (bool, optional): Use RANSAC SVD solver. Defaults to False.
+
+    Returns:
+        _type_: _description_
+    """
     lap_solver1 = hungarian
     s_perm_indexs = []
     for estimate_iter in tqdm(range(estimate_iters)):
@@ -35,15 +57,35 @@ def caliters_perm(model, P1_gt_copy, P2_gt_copy,
         P1_gt_copy[:,:,3:6] = P1_gt_copy[:,:,3:6] @ R_pre.transpose(-1, -2)
     return s_perm_i_mat
 
-def infer_on_mesh(x_mesh, y_mesh, model, 
-                  x_n: int = 2048,
-                  y_n: int = 2048,
+def infer_on_mesh(x_mesh:trimesh.Trimesh, 
+                  y_mesh:trimesh.Trimesh, 
+                  model: torch.nn.Module, 
+                  num_points: int = 2048,
                   eval_cycle:bool=True, 
                   estimate_iters:int=1,
                   use_ransac:bool=False):
+    """
+    Single batch inference on one pair of mesh
+
+    Args:
+        x_mesh (trimesh.Trimesh): Source mesh.
+        y_mesh (trimesh.Trimesh): Target mesh.
+        model (torch.nn.Module): Torch model to use. Make sure to
+                                configure the model with utils.config.cfg_from_file
+                                and load the model weight correctly using
+                                utils.model_sl.load_model.
+        num_points (int, optional): Number of points to sample. 
+                                    Defaults to 2048.
+        eval_cycle (bool, optional): _description_. Defaults to True.
+        estimate_iters (int, optional): _description_. Defaults to 1.
+        use_ransac (bool, optional): _description_. Defaults to False.
+
+    Returns:
+        _type_: _description_
+    """
     lap_solver = hungarian
     with torch.set_grad_enabled(False):
-        n1_gt, n2_gt = torch.tensor([x_n]).cuda(), torch.tensor([y_n]).cuda()
+        n1_gt, n2_gt = torch.tensor([num_points]).cuda(), torch.tensor([num_points]).cuda()
         x_pc, x_idx = x_mesh.sample(n1_gt, return_index=True)
         P1_gt = torch.as_tensor(np.concatenate([x_pc.copy(), 
                                                 x_mesh.face_normals[x_idx]].copy(), 
@@ -106,12 +148,8 @@ if __name__ == '__main__':
     print(f'GT rotated by {r_gt.magnitude() * 180 / np.pi:.2f} degrees')
 
     R, T = infer_on_mesh(x_mesh, x_mesh_gt, 
-                         model,
-                         x_n=2048,
-                         y_n=2048,
-                         eval_cycle=True, 
-                         estimate_iters=100, 
-                         use_ransac=False)
+                         model, 
+                         estimate_iters=100)
 
     x_mesh_copy = x_mesh.copy()
     y_mesh_copy = y_mesh.copy()
