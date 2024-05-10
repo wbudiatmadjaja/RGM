@@ -135,7 +135,7 @@ class DGCNN(nn.Module):
     def __init__(self, features, neighboursnum, emb_dims=512):
         super(DGCNN, self).__init__()
 
-        # 确定输入的点云信息
+        # Determine the input point cloud information
         self.features = features
         self.neighboursnum = neighboursnum
         raw_dim = sum([_raw_features_sizes[f] for f in self.features])  # number of channels after concat
